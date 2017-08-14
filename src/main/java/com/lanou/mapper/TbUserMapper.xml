@@ -1,71 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lanou.mapper.TbUserMapper">
-  <resultMap id="BaseResultMap" type="com.lanou.bean.TbUser">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ID, password, phoneNumber
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_user
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_user
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lanou.bean.TbUser">
-    insert into tb_user (ID, password, phoneNumber
-      )
-    values (#{id,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.lanou.bean.TbUser">
-    insert into tb_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="phonenumber != null">
-        phoneNumber,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenumber != null">
-        #{phonenumber,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbUser">
-    update tb_user
-    <set>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenumber != null">
-        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbUser">
-    update tb_user
-    set password = #{password,jdbcType=VARCHAR},
-      phoneNumber = #{phonenumber,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.lanou.bean.TbUser">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="phoneNumber" jdbcType="VARCHAR" property="phonenumber" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, password, phoneNumber
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_user
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_user
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lanou.bean.TbUser">
+		insert into tb_user (ID,
+		password, phoneNumber
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{password,jdbcType=VARCHAR},
+		#{phonenumber,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lanou.bean.TbUser">
+		insert into tb_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="phonenumber != null">
+				phoneNumber,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phonenumber != null">
+				#{phonenumber,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbUser">
+		update tb_user
+		<set>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phonenumber != null">
+				phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbUser">
+		update tb_user
+		set
+		password = #{password,jdbcType=VARCHAR},
+		phoneNumber =
+		#{phonenumber,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOne" parameterType="com.lanou.bean.TbUser"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_user
+		where password = #{password,jdbcType=VARCHAR} and
+		phoneNumber =
+		#{phonenumber,jdbcType=VARCHAR}
+	</select>
 </mapper>

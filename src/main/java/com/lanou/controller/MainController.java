@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lanou.bean.Users;
+import com.lanou.bean.TbUser;
 import com.lanou.service.IUserService;
 
 @Controller
@@ -24,7 +24,7 @@ public class MainController {
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public Map<String, Object> selectOne(Users user) {
+	public Map<String, Object> selectOne(TbUser user) {
 		return userservice.userLogin(user);
 	}
 
