@@ -1,33 +1,33 @@
 package com.lanou.bean;
 
 public class TbUser {
-    private Integer id;
+	private Integer id;
 
-    private String password;
+	private String password;
 
-    private String phonenumber;
+	private String phoneNumber;
 
-    public Integer getId() {
-        return id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getPhonenumber() {
-        return phonenumber;
-    }
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 }

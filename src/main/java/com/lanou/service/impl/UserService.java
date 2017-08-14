@@ -22,7 +22,7 @@ public class UserService implements IUserService {
 		TbUser user1 = usersMapper.selectOne(user);
 		if (user1 != null) {
 			result.put("result", 1);
-			result.put("phoneNumber", user.getPhonenumber());
+			result.put("phoneNumber", user.getPhoneNumber());
 		} else {
 			result.put("result", 0);
 		}
