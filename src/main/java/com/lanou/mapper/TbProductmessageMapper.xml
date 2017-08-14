@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbProductmessageMapper">
+  <resultMap id="BaseResultMap" type="com.lanou.bean.TbProductmessage">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="productMessage" jdbcType="VARCHAR" property="productmessage" />
+    <result column="details" jdbcType="INTEGER" property="details" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="server" jdbcType="VARCHAR" property="server" />
+    <result column="productID" jdbcType="INTEGER" property="productid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, productMessage, details, stock, server, productID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_productmessage
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_productmessage
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanou.bean.TbProductmessage">
+    insert into tb_productmessage (ID, productMessage, details, 
+      stock, server, productID
+      )
+    values (#{id,jdbcType=INTEGER}, #{productmessage,jdbcType=VARCHAR}, #{details,jdbcType=INTEGER}, 
+      #{stock,jdbcType=INTEGER}, #{server,jdbcType=VARCHAR}, #{productid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanou.bean.TbProductmessage">
+    insert into tb_productmessage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="productmessage != null">
+        productMessage,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="server != null">
+        server,
+      </if>
+      <if test="productid != null">
+        productID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productmessage != null">
+        #{productmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="server != null">
+        #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbProductmessage">
+    update tb_productmessage
+    <set>
+      <if test="productmessage != null">
+        productMessage = #{productmessage,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="server != null">
+        server = #{server,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        productID = #{productid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbProductmessage">
+    update tb_productmessage
+    set productMessage = #{productmessage,jdbcType=VARCHAR},
+      details = #{details,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=INTEGER},
+      server = #{server,jdbcType=VARCHAR},
+      productID = #{productid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

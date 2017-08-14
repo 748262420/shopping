@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbProductMapper">
+  <resultMap id="BaseResultMap" type="com.lanou.bean.TbProduct">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="productPhoto" jdbcType="VARCHAR" property="productphoto" />
+    <result column="productName" jdbcType="VARCHAR" property="productname" />
+    <result column="popularity" jdbcType="VARCHAR" property="popularity" />
+    <result column="sales" jdbcType="VARCHAR" property="sales" />
+    <result column="newProduct" jdbcType="VARCHAR" property="newproduct" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="classifyID" jdbcType="INTEGER" property="classifyid" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, productPhoto, productName, popularity, sales, newProduct, price, classifyID, 
+    detail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_product
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_product
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanou.bean.TbProduct">
+    insert into tb_product (ID, productPhoto, productName, 
+      popularity, sales, newProduct, 
+      price, classifyID, detail
+      )
+    values (#{id,jdbcType=INTEGER}, #{productphoto,jdbcType=VARCHAR}, #{productname,jdbcType=VARCHAR}, 
+      #{popularity,jdbcType=VARCHAR}, #{sales,jdbcType=VARCHAR}, #{newproduct,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{classifyid,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanou.bean.TbProduct">
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="productphoto != null">
+        productPhoto,
+      </if>
+      <if test="productname != null">
+        productName,
+      </if>
+      <if test="popularity != null">
+        popularity,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="newproduct != null">
+        newProduct,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="classifyid != null">
+        classifyID,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productphoto != null">
+        #{productphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="popularity != null">
+        #{popularity,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=VARCHAR},
+      </if>
+      <if test="newproduct != null">
+        #{newproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyid != null">
+        #{classifyid,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbProduct">
+    update tb_product
+    <set>
+      <if test="productphoto != null">
+        productPhoto = #{productphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="productname != null">
+        productName = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="popularity != null">
+        popularity = #{popularity,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=VARCHAR},
+      </if>
+      <if test="newproduct != null">
+        newProduct = #{newproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="classifyid != null">
+        classifyID = #{classifyid,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbProduct">
+    update tb_product
+    set productPhoto = #{productphoto,jdbcType=VARCHAR},
+      productName = #{productname,jdbcType=VARCHAR},
+      popularity = #{popularity,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=VARCHAR},
+      newProduct = #{newproduct,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      classifyID = #{classifyid,jdbcType=INTEGER},
+      detail = #{detail,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

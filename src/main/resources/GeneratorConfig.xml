@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:/localRepository/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 忽略所有的注释内容 -->
+			<property name="suppressAllComments" value="true" />
+			<!-- 忽略所有的注释时间 -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/shopping"
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+		<!-- Bean生成的包位置 -->
+		<javaModelGenerator targetPackage="com.lanou.bean"
+			targetProject="Shopping/src/main/java" />
+		<!-- xml文件生成的位置 -->
+		<sqlMapGenerator targetPackage="com.lanou.mapper"
+			targetProject="Shopping/src/main/java" />
+		<!-- interface文件生成的位置 -->
+		<javaClientGenerator targetPackage="com.lanou.mapper"
+			targetProject="Shopping/src/main/java" type="XMLMAPPER" />
+		<table tableName="tb_user" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_address" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_classify" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_admin" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_details" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_oder" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_product" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_productmessage" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_shopdata" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_shoppingcar" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_usermessage" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_userproduct" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+	</context>
+</generatorConfiguration>
