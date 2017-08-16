@@ -8,10 +8,14 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.lanou.bean.TbAddress;
+import com.lanou.bean.TbDetails;
 import com.lanou.bean.TbProduct;
+import com.lanou.bean.TbProductmessage;
 import com.lanou.bean.TbUser;
 import com.lanou.mapper.TbAddressMapper;
+import com.lanou.mapper.TbDetailsMapper;
 import com.lanou.mapper.TbProductMapper;
+import com.lanou.mapper.TbProductmessageMapper;
 import com.lanou.mapper.TbUserMapper;
 import com.lanou.service.IUserService;
 
@@ -24,6 +28,10 @@ public class UserService implements IUserService {
 	private TbProductMapper productMapper;
 	@Resource
 	private TbAddressMapper addressMapper;
+	@Resource
+	private TbProductmessageMapper productmessageMapper;
+	@Resource
+	private TbDetailsMapper detailsMapper;
 
 	public Map<String, Object> userLogin(TbUser user) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -37,14 +45,15 @@ public class UserService implements IUserService {
 		return result;
 	}
 
-	public Map<String, Object> add(TbProduct product) {
+	public Map<String, Object> add_data(TbProduct product, TbProductmessage productmessage) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		TbProduct product2 = productMapper.selectOne(product);
 		if (product2 != null) {
 			result.put("result", -2);
 		} else {
 			int i = productMapper.insert(product);
-			if (i == 1) {
+			int k = productmessageMapper.insert(productmessage);
+			if (i == 1 && k == 1) {
 				result.put("result", 1);
 			} else {
 				result.put("result", -1);
@@ -59,6 +68,22 @@ public class UserService implements IUserService {
 		if (product2 != null) {
 			int ii = productMapper.updateByPrimaryKeySelective(product);
 			if (ii == 1) {
+				result.put("result", 1);
+			} else {
+				result.put("result", -1);
+			}
+		} else {
+			result.put("result", -2);
+		}
+		return result;
+	}
+
+	public Map<String, Object> remove_data(Integer id) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		TbProduct product = productMapper.selectByPrimaryKey(id);
+		if (product != null) {
+			int i = productMapper.deleteByPrimaryKey(id);
+			if (i == 1) {
 				result.put("result", 1);
 			} else {
 				result.put("result", -1);
@@ -89,6 +114,26 @@ public class UserService implements IUserService {
 			result.put("result", 0);
 		}
 		return result;
+	}
+
+	public Map<String, Object> delete(Integer id) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		int i = addressMapper.deleteByPrimaryKey(id);
+		if (i == 1) {
+			result.put("result", 1);
+		} else {
+			result.put("result", 0);
+		}
+		return result;
+	}
+
+	public boolean add_details(TbDetails details) {
+		int i = detailsMapper.insert(details);
+		if (i == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -1,23 +1,23 @@
 package com.lanou.controller;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.lanou.bean.TbAddress;
+import com.lanou.bean.TbDetails;
 import com.lanou.bean.TbProduct;
+import com.lanou.bean.TbProductmessage;
 import com.lanou.bean.TbUser;
 import com.lanou.service.IUserService;
+import com.lanou.util.Base64;
 
 @Controller
 public class MainController {
@@ -36,20 +36,19 @@ public class MainController {
 		return userservice.userLogin(user);
 	}
 
-	@RequestMapping(value = "/adddata", method = RequestMethod.POST)
+	@RequestMapping("/add_data")
 	@ResponseBody
-	public Map<String, Object> add_data(MultipartFile file, HttpServletRequest request, TbProduct product)
-			throws IOException {
-		String path = request.getSession().getServletContext().getRealPath("/upload");
-		String fileName = file.getOriginalFilename();
-		File dir = new File(path, fileName);
-		if (!dir.exists()) {
-			dir.mkdirs();
+	public Map<String, Object> add_data(@RequestParam("shopJson") List<Map<String, Object>> img, TbProduct product,
+			TbProductmessage productmessage, List<TbDetails> details) {
+		for (int i = 0; i < img.size(); i++) {
+			String type = (String) img.get(i).get("type");
+			String bg = img.get(i).get("base64").toString().substring(23);
+			String path = new Base64().generateImage(bg, type);
+			details.get(i).setProductid(product.getId());
+			details.get(i).setPhotos(path);
+			userservice.add_details(details.get(i));
 		}
-		file.transferTo(dir);
-		product.setProductphoto(request.getSession().getServletContext().getRealPath("upload") + path);
-
-		return userservice.add(product);
+		return userservice.add_data(product, productmessage);
 	}
 
 	@RequestMapping("/modify_data")
@@ -58,16 +57,25 @@ public class MainController {
 		return userservice.modify_data(product);
 	}
 
+	@RequestMapping("/remove_data")
+	@ResponseBody
+	public Map<String, Object> remove_data(@RequestParam("removeID") Integer id) {
+		return userservice.remove_data(id);
+	}
+
 	@RequestMapping("/person")
 	@ResponseBody
 	public Map<String, Object> person(TbAddress address, @RequestParam("addORselect") String addORselect,
-			@RequestParam("phoneNumber") String phoneNumber) {
-		if (addORselect.equals("add")) {
-			return userservice.add(address);
-		} else if (addORselect.equals("select")) {
-			return userservice.select(phoneNumber);
-		}
-		return null;
-	}
+			@RequestParam("phoneNumber") String phoneNumber, @RequestParam("id") Integer id) {
+		Map<String, Object> result = new HashMap<String, Object>();
 
+		if (addORselect.equals("add")) {
+			result = userservice.add(address);
+		} else if (addORselect.equals("select")) {
+			result = userservice.select(phoneNumber);
+		} else if (addORselect.equals("delete")) {
+			result = userservice.delete(id);
+		}
+		return result;
+	}
 }
