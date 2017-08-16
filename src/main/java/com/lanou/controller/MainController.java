@@ -27,7 +27,17 @@ public class MainController {
 
 	@RequestMapping("/userlogin")
 	public String login() {
+		return "index22";
+	}
+
+	@RequestMapping("/index")
+	public String index() {
 		return "index";
+	}
+
+	@RequestMapping("/addproduct")
+	public String addproduct() {
+		return "addproduct";
 	}
 
 	@RequestMapping("/login")
@@ -40,6 +50,7 @@ public class MainController {
 	@ResponseBody
 	public Map<String, Object> add_data(@RequestParam("shopJson") List<Map<String, Object>> img, TbProduct product,
 			TbProductmessage productmessage, List<TbDetails> details) {
+		System.out.println("+++++++++++++++++++++++++++++++++++++");
 		for (int i = 0; i < img.size(); i++) {
 			String type = (String) img.get(i).get("type");
 			String bg = img.get(i).get("base64").toString().substring(23);
