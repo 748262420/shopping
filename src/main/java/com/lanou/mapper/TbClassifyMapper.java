@@ -1,5 +1,7 @@
 package com.lanou.mapper;
 
+import java.util.List;
+
 import com.lanou.bean.TbClassify;
 
 public interface TbClassifyMapper {
@@ -14,4 +16,6 @@ public interface TbClassifyMapper {
     int updateByPrimaryKeySelective(TbClassify record);
 
     int updateByPrimaryKey(TbClassify record);
+    
+    List<TbClassify> findClassInformation();
 }

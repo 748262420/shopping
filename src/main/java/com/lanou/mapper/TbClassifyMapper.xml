@@ -8,6 +8,8 @@
     <result column="classifySmall" jdbcType="VARCHAR" property="classifysmall" />
   </resultMap>
   <sql id="Base_Column_List">
+  
+  
     ID, classify, classifyPhoto, classifySmall
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -16,6 +18,13 @@
     from tb_classify
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  
+    <select id="findClassInformation"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />  from tb_classify
+    
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_classify
     where ID = #{id,jdbcType=INTEGER}

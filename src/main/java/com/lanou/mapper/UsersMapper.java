@@ -2,6 +2,7 @@ package com.lanou.mapper;
 
 import org.springframework.stereotype.Repository;
 
+import com.lanou.bean.TbUser;
 import com.lanou.bean.Users;
 
 @Repository
@@ -18,5 +19,5 @@ public interface UsersMapper {
 
 	int updateByPrimaryKey(Users record);
 
-	Users selectOne(Users user);
+	Users selectOne(TbUser user);
 }
