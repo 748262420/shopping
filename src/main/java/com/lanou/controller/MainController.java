@@ -16,6 +16,7 @@ import com.lanou.bean.TbDetails;
 import com.lanou.bean.TbProduct;
 import com.lanou.bean.TbProductmessage;
 import com.lanou.bean.TbUser;
+import com.lanou.bean.TbUsermessage;
 import com.lanou.service.IUserService;
 import com.lanou.util.Base64;
 
@@ -25,32 +26,28 @@ public class MainController {
 	@Resource
 	private IUserService userservice;
 
-	@RequestMapping("/userlogin")
-	public String login() {
-		return "index22";
-	}
-
-	@RequestMapping("/index")
-	public String index() {
-		return "index";
-	}
-
-	@RequestMapping("/addproduct")
-	public String addproduct() {
-		return "addproduct";
-	}
-
 	@RequestMapping("/login")
 	@ResponseBody
 	public Map<String, Object> selectOne(TbUser user) {
 		return userservice.userLogin(user);
 	}
 
+	@RequestMapping("/register")
+	@ResponseBody
+	public Map<String, Object> insertOne(TbUser user) {
+		return userservice.userRegister(user);
+	}
+
+	@RequestMapping("/tb_userMessage")
+	@ResponseBody
+	public Map<String, Object> tb_userMessage(TbUsermessage usermessage, TbUser user) {
+		return userservice.tb_userMessage(usermessage, user);
+	}
+
 	@RequestMapping("/add_data")
 	@ResponseBody
 	public Map<String, Object> add_data(@RequestParam("shopJson") List<Map<String, Object>> img, TbProduct product,
 			TbProductmessage productmessage, List<TbDetails> details) {
-		System.out.println("+++++++++++++++++++++++++++++++++++++");
 		for (int i = 0; i < img.size(); i++) {
 			String type = (String) img.get(i).get("type");
 			String bg = img.get(i).get("base64").toString().substring(23);
@@ -62,7 +59,7 @@ public class MainController {
 		return userservice.add_data(product, productmessage);
 	}
 
-	@RequestMapping("/modify_data")
+	@RequestMapping(value = "/modify_data")
 	@ResponseBody
 	public Map<String, Object> modify_data(TbProduct product) {
 		return userservice.modify_data(product);
@@ -79,7 +76,6 @@ public class MainController {
 	public Map<String, Object> person(TbAddress address, @RequestParam("addORselect") String addORselect,
 			@RequestParam("phoneNumber") String phoneNumber, @RequestParam("id") Integer id) {
 		Map<String, Object> result = new HashMap<String, Object>();
-
 		if (addORselect.equals("add")) {
 			result = userservice.add(address);
 		} else if (addORselect.equals("select")) {

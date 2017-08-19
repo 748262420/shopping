@@ -12,11 +12,13 @@ import com.lanou.bean.TbDetails;
 import com.lanou.bean.TbProduct;
 import com.lanou.bean.TbProductmessage;
 import com.lanou.bean.TbUser;
+import com.lanou.bean.TbUsermessage;
 import com.lanou.mapper.TbAddressMapper;
 import com.lanou.mapper.TbDetailsMapper;
 import com.lanou.mapper.TbProductMapper;
 import com.lanou.mapper.TbProductmessageMapper;
 import com.lanou.mapper.TbUserMapper;
+import com.lanou.mapper.TbUsermessageMapper;
 import com.lanou.service.IUserService;
 
 @Service
@@ -32,6 +34,8 @@ public class UserService implements IUserService {
 	private TbProductmessageMapper productmessageMapper;
 	@Resource
 	private TbDetailsMapper detailsMapper;
+	@Resource
+	private TbUsermessageMapper usermessageMapper;
 
 	public Map<String, Object> userLogin(TbUser user) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -42,6 +46,43 @@ public class UserService implements IUserService {
 		} else {
 			result.put("result", 0);
 		}
+		return result;
+	}
+
+	public Map<String, Object> userRegister(TbUser user) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		TbUser user1 = usersMapper.selectOne(user);
+		if (user1 != null) {
+			result.put("result", 0);
+		} else {
+			int i = usersMapper.insert(user);
+			if (i == 1) {
+				result.put("result", 1);
+			}
+		}
+		return result;
+	}
+
+	public Map<String, Object> tb_userMessage(TbUsermessage usermessage, TbUser user) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		TbUser user2 = usersMapper.selectId(user);
+		TbUsermessage usermessage2 = usermessageMapper.selectone(user2.getId());
+		if (usermessage2 != null) {
+			int i = usermessageMapper.updateByPrimaryKeySelective(usermessage);
+			if (i == 1) {
+				result.put("result", 1);
+			} else {
+				result.put("result", 0);
+			}
+		} else {
+			int i = usermessageMapper.insertSelective(usermessage);
+			if (i == 1) {
+				result.put("result", 1);
+			} else {
+				result.put("result", 0);
+			}
+		}
+
 		return result;
 	}
 
@@ -134,6 +175,20 @@ public class UserService implements IUserService {
 		} else {
 			return false;
 		}
+	}
+
+	public Map<String, Object> tb_userMessageselect(TbUser user) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		TbUser user2 = usersMapper.selectId(user);
+		if (user2 != null) {
+			TbUsermessage usermessage2 = usermessageMapper.selectone(user.getId());
+			result.put("result", 1);
+			result.put("username", usermessage2.getUsername());
+			result.put("signature", usermessage2.getSignature());
+		} else {
+			result.put("result", 0);
+		}
+		return null;
 	}
 
 }

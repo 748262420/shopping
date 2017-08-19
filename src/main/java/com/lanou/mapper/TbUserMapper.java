@@ -16,4 +16,6 @@ public interface TbUserMapper {
 	int updateByPrimaryKey(TbUser record);
 
 	TbUser selectOne(TbUser user);
+
+	TbUser selectId(TbUser user);
 }

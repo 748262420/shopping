@@ -7,10 +7,17 @@ import com.lanou.bean.TbDetails;
 import com.lanou.bean.TbProduct;
 import com.lanou.bean.TbProductmessage;
 import com.lanou.bean.TbUser;
+import com.lanou.bean.TbUsermessage;
 
 public interface IUserService {
 
 	public Map<String, Object> userLogin(TbUser user);
+
+	public Map<String, Object> userRegister(TbUser user);
+
+	public Map<String, Object> tb_userMessage(TbUsermessage usermessage, TbUser user);
+
+	public Map<String, Object> tb_userMessageselect(TbUser user);
 
 	public Map<String, Object> add_data(TbProduct product, TbProductmessage productmessage);
 

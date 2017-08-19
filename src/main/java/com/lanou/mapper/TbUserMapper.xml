@@ -84,4 +84,12 @@
 		phoneNumber = #{phoneNumber,jdbcType=VARCHAR} and
 		password = #{password,jdbcType=VARCHAR}
 	</select>
+	<select id="selectId" parameterType="com.lanou.bean.TbUser"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_user
+		where
+		phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
+	</select>
 </mapper>
